@@ -4,12 +4,12 @@ import os
 def test_where_returns_events():
   assert len(FundingRaised.where({'company_name': 'Facebook'})) == 7
 
-# def test_where_returns_correct_keys():
-#   row = FundingRaised.where({'company_name': 'Facebook'})[0]
-#   keys = ['permalink', 'company_name', 'number_employees', 'category', 'city', 'state', 'funded_date', 'raised_amount', 'raised_currency', 'round']
-#   values = ['facebook', 'Facebook', '450', 'web', 'Palo Alto', 'CA', '1-Sep-04', '500000', 'USD', 'angel']
-#   for i in range(0, len(keys)):
-#     assert row[keys[i]] == values[i]
+def test_where_returns_correct_keys():
+  row = FundingRaised.where({'company_name': 'Facebook'}).head(1)
+  keys = ['permalink', 'company_name', 'number_employees', 'category', 'city', 'state', 'funded_date', 'raised_amount', 'raised_currency', 'round']
+  values = ['facebook', 'Facebook', '450.0', 'web', 'Palo Alto', 'CA', '1-Sep-04', '500000', 'USD', 'angel']
+  for i in range(0, len(keys)):
+    assert str(row[keys[i]].values[0]) == values[i]
 
 def test_where_returns_events_by_city():
   assert len(FundingRaised.where({'city': 'Tempe'})) == 3
